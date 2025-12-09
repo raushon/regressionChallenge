@@ -1023,7 +1023,6 @@ print(model_subset_sm.summary())
 
 ```{python}
 #| label: subset-vs-full-comparison
-#| echo: true
 #| fig-cap: "Comparing subset results to full model"
 
 # Full model (from earlier analysis)
