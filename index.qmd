@@ -255,6 +255,72 @@ plt.show()
 
 1. **Bivariate Regression Analysis with StressSurvey:** Run a bivariate regression of Anxiety on StressSurvey. What are the estimated coefficients? How do they compare to the true relationship?
 
+**Answer:**
+
+To answer this question, I'll run a bivariate regression of Anxiety on StressSurvey using the observed data. The true relationship we know is:
+
+$$Anxiety = Stress + 0.1 \times Time$$
+
+where $\beta_0 = 0$, $\beta_1 = 1$ (for Stress), and $\beta_2 = 0.1$ (for Time). However, in this bivariate regression, we're only using StressSurvey (a proxy for Stress) as the predictor, not the true Stress variable.
+
+```{python}
+#| label: bivariate-stresssurvey-regression
+#| echo: true
+#| fig-cap: "Bivariate regression of Anxiety on StressSurvey"
+
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+import statsmodels.api as sm
+
+# Load the data (already defined earlier)
+# observDF contains: Stress, StressSurvey, Time, Anxiety
+
+# Prepare data for regression
+X_stresssurvey = observDF[['StressSurvey']].values
+y_anxiety = observDF['Anxiety'].values
+
+# Fit linear regression using sklearn
+model_stresssurvey = LinearRegression()
+model_stresssurvey.fit(X_stresssurvey, y_anxiety)
+
+# Get coefficients
+intercept = model_stresssurvey.intercept_
+coefficient = model_stresssurvey.coef_[0]
+r_squared = r2_score(y_anxiety, model_stresssurvey.predict(X_stresssurvey))
+
+# Also use statsmodels for detailed statistical output
+X_sm = sm.add_constant(X_stresssurvey)
+model_sm = sm.OLS(y_anxiety, X_sm).fit()
+
+print("=" * 60)
+print("BIVARIATE REGRESSION: Anxiety ~ StressSurvey")
+print("=" * 60)
+print(f"\nEstimated Intercept (β₀): {intercept:.6f}")
+print(f"Estimated Coefficient (β₁): {coefficient:.6f}")
+print(f"R-squared: {r_squared:.6f}")
+print("\n" + "=" * 60)
+print("DETAILED STATISTICAL OUTPUT:")
+print("=" * 60)
+print(model_sm.summary())
+```
+
+**Comparison to True Relationship:**
+
+The true relationship is $Anxiety = Stress + 0.1 \times Time$, where:
+- The coefficient on Stress ($\beta_1$) = 1.0
+- The coefficient on Time ($\beta_2$) = 0.1
+- The intercept ($\beta_0$) = 0
+
+However, in this bivariate regression, we're regressing Anxiety on StressSurvey (not the true Stress variable). Since StressSurvey is a non-linear proxy for Stress, the estimated coefficient will not match the true coefficient of 1.0 for Stress. The regression is trying to fit a linear relationship between StressSurvey and Anxiety, but the underlying relationship is non-linear because:
+
+1. StressSurvey is not perfectly linearly related to Stress
+2. Anxiety also depends on Time, which varies across observations
+3. The bivariate model omits Time, leading to omitted variable bias
+
+The estimated coefficient from this regression represents the average change in Anxiety per unit change in StressSurvey, but this is a distorted estimate because it's trying to capture both the Stress→Anxiety relationship and the Time→Anxiety relationship through the StressSurvey variable alone.
+
 2. **Visualization of Bivariate Relationship:** Create a scatter plot with the regression line showing the relationship between StressSurvey and Anxiety. Comment on the fit and any potential issues.
 
 3. **Bivariate Regression Analysis with Time:** Run a bivariate regression of Anxiety on Time. What are the estimated coefficients? How do they compare to the true relationship?
