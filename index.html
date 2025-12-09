@@ -232,7 +232,7 @@ Anxiety = \beta_0 + \beta_1 \times Stress + \beta_2 \times Time + \epsilon
 Table&nbsp;1: Observed data with known true relationships
 </figcaption>
 <div aria-describedby="tbl-observations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div class="cell-output cell-output-display" data-execution_count="44">
 <div>
 
 
@@ -455,7 +455,7 @@ Dep. Variable:                      y   R-squared:                       0.901
 Model:                            OLS   Adj. R-squared:                  0.893
 Method:                 Least Squares   F-statistic:                     118.4
 Date:                Tue, 09 Dec 2025   Prob (F-statistic):           6.68e-08
-Time:                        17:05:24   Log-Likelihood:                -27.079
+Time:                        17:10:04   Log-Likelihood:                -27.079
 No. Observations:                  15   AIC:                             58.16
 Df Residuals:                      13   BIC:                             59.57
 Df Model:                           1                                         
@@ -571,7 +571,7 @@ Dep. Variable:                      y   R-squared:                       0.563
 Model:                            OLS   Adj. R-squared:                  0.529
 Method:                 Least Squares   F-statistic:                     16.75
 Date:                Tue, 09 Dec 2025   Prob (F-statistic):            0.00127
-Time:                        17:05:25   Log-Likelihood:                -38.223
+Time:                        17:10:05   Log-Likelihood:                -38.223
 No. Observations:                  15   AIC:                             80.45
 Df Residuals:                      13   BIC:                             81.86
 Df Model:                           1                                         
@@ -695,7 +695,7 @@ Dep. Variable:                      y   R-squared:                       0.935
 Model:                            OLS   Adj. R-squared:                  0.924
 Method:                 Least Squares   F-statistic:                     86.32
 Date:                Tue, 09 Dec 2025   Prob (F-statistic):           7.54e-08
-Time:                        17:05:25   Log-Likelihood:                -23.931
+Time:                        17:10:05   Log-Likelihood:                -23.931
 No. Observations:                  15   AIC:                             53.86
 Df Residuals:                      12   BIC:                             55.99
 Df Model:                           2                                         
@@ -803,7 +803,7 @@ Dep. Variable:                      y   R-squared:                       1.000
 Model:                            OLS   Adj. R-squared:                  1.000
 Method:                 Least Squares   F-statistic:                 5.369e+30
 Date:                Tue, 09 Dec 2025   Prob (F-statistic):          1.95e-180
-Time:                        17:05:25   Log-Likelihood:                 472.82
+Time:                        17:10:05   Log-Likelihood:                 472.82
 No. Observations:                  15   AIC:                            -939.6
 Df Residuals:                      12   BIC:                            -937.5
 Df Model:                           2                                         
@@ -907,7 +907,7 @@ Dep. Variable:                      y   R-squared:                       0.935
 Model:                            OLS   Adj. R-squared:                  0.924
 Method:                 Least Squares   F-statistic:                     86.32
 Date:                Tue, 09 Dec 2025   Prob (F-statistic):           7.54e-08
-Time:                        17:05:25   Log-Likelihood:                -23.931
+Time:                        17:10:05   Log-Likelihood:                -23.931
 No. Observations:                  15   AIC:                             53.86
 Df Residuals:                      12   BIC:                             55.99
 Df Model:                           2                                         
@@ -937,7 +937,7 @@ Dep. Variable:                      y   R-squared:                       1.000
 Model:                            OLS   Adj. R-squared:                  1.000
 Method:                 Least Squares   F-statistic:                 5.369e+30
 Date:                Tue, 09 Dec 2025   Prob (F-statistic):          1.95e-180
-Time:                        17:05:25   Log-Likelihood:                 472.82
+Time:                        17:10:05   Log-Likelihood:                 472.82
 No. Observations:                  15   AIC:                            -939.6
 Df Residuals:                      12   BIC:                            -937.5
 Df Model:                           2                                         
@@ -1164,7 +1164,7 @@ Dep. Variable:                      y   R-squared:                       1.000
 Model:                            OLS   Adj. R-squared:                  1.000
 Method:                 Least Squares   F-statistic:                 2.275e+31
 Date:                Tue, 09 Dec 2025   Prob (F-statistic):           2.29e-93
-Time:                        17:05:26   Log-Likelihood:                 308.43
+Time:                        17:10:06   Log-Likelihood:                 308.43
 No. Observations:                   9   AIC:                            -610.9
 Df Residuals:                       6   BIC:                            -610.3
 Df Model:                           2                                         
@@ -1194,60 +1194,6 @@ kurtosistest only valid for n&gt;=20 ... continuing anyway, n=9
 </div>
 <p><strong>Step 4: Comparison with Full Model</strong></p>
 <div id="subset-vs-full-comparison" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Full model (from earlier analysis)</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>X_full <span class="op">=</span> observDF[[<span class="st">'StressSurvey'</span>, <span class="st">'Time'</span>]].values</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>y_full <span class="op">=</span> observDF[<span class="st">'Anxiety'</span>].values</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>X_full_sm <span class="op">=</span> sm.add_constant(X_full)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>model_full_sm <span class="op">=</span> sm.OLS(y_full, X_full_sm).fit()</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"COMPARISON: Subset vs Full Model"</span>)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>comparison_results <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Model'</span>: [<span class="st">'Full Model'</span>, <span class="st">'Subset Model (Stress ≤ 2)'</span>, <span class="st">'True Values'</span>],</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Intercept'</span>: [</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>model_full_sm<span class="sc">.</span>params[<span class="dv">0</span>]<span class="sc">:.6f}</span><span class="ss">"</span>,</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>model_subset_sm<span class="sc">.</span>params[<span class="dv">0</span>]<span class="sc">:.6f}</span><span class="ss">"</span>,</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"0.000000"</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'StressSurvey Coef'</span>: [</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>model_full_sm<span class="sc">.</span>params[<span class="dv">1</span>]<span class="sc">:.6f}</span><span class="ss">"</span>,</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>model_subset_sm<span class="sc">.</span>params[<span class="dv">1</span>]<span class="sc">:.6f}</span><span class="ss">"</span>,</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"N/A (Expected: ~0.333)"</span></span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Time Coef'</span>: [</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>model_full_sm<span class="sc">.</span>params[<span class="dv">2</span>]<span class="sc">:.6f}</span><span class="ss">"</span>,</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>model_subset_sm<span class="sc">.</span>params[<span class="dv">2</span>]<span class="sc">:.6f}</span><span class="ss">"</span>,</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"0.100000"</span></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">'R-squared'</span>: [</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>model_full_sm<span class="sc">.</span>rsquared<span class="sc">:.6f}</span><span class="ss">"</span>,</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>model_subset_sm<span class="sc">.</span>rsquared<span class="sc">:.6f}</span><span class="ss">"</span>,</span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">"1.000000"</span></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">'All Coefs Significant?'</span>: [</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Yes"</span> <span class="cf">if</span> <span class="bu">all</span>(p <span class="op">&lt;</span> <span class="fl">0.05</span> <span class="cf">for</span> p <span class="kw">in</span> model_full_sm.pvalues) <span class="cf">else</span> <span class="st">"No"</span>,</span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Yes"</span> <span class="cf">if</span> <span class="bu">all</span>(p <span class="op">&lt;</span> <span class="fl">0.05</span> <span class="cf">for</span> p <span class="kw">in</span> model_subset_sm.pvalues) <span class="cf">else</span> <span class="st">"No"</span>,</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"N/A"</span></span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> comparison_results.to_string(index<span class="op">=</span><span class="va">False</span>))</span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"KEY FINDINGS"</span>)</span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">1. Time Coefficient Accuracy:"</span>)</span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>time_error_full <span class="op">=</span> <span class="bu">abs</span>(model_full_sm.params[<span class="dv">2</span>] <span class="op">-</span> <span class="fl">0.1</span>)</span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>time_error_subset <span class="op">=</span> <span class="bu">abs</span>(model_subset_sm.params[<span class="dv">2</span>] <span class="op">-</span> <span class="fl">0.1</span>)</span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"   Full model error: </span><span class="sc">{</span>time_error_full<span class="sc">:.6f}</span><span class="ss">"</span>)</span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"   Subset model error: </span><span class="sc">{</span>time_error_subset<span class="sc">:.6f}</span><span class="ss">"</span>)</span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"   Improvement: </span><span class="sc">{</span>((time_error_full <span class="op">-</span> time_error_subset) <span class="op">/</span> time_error_full <span class="op">*</span> <span class="dv">100</span>)<span class="sc">:.1f}</span><span class="ss">% reduction in error"</span>)</span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">2. Statistical Significance:"</span>)</span>
-<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"   Full model: All coefficients significant = </span><span class="sc">{</span><span class="bu">all</span>(p <span class="op">&lt;</span> <span class="fl">0.05</span> <span class="cf">for</span> p <span class="kw">in</span> model_full_sm.pvalues)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"   Subset model: All coefficients significant = </span><span class="sc">{</span><span class="bu">all</span>(p <span class="op">&lt;</span> <span class="fl">0.05</span> <span class="cf">for</span> p <span class="kw">in</span> model_subset_sm.pvalues)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>================================================================================
 COMPARISON: Subset vs Full Model
