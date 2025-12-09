@@ -4,7 +4,7 @@ subtitle: "Don't Trust Linear Models - The Perils of Non-Linearity"
 format:
   html: default
 execute:
-  echo: true
+  echo: false
   eval: true
 ---
 
@@ -168,7 +168,6 @@ where $\beta_0 = 0$, $\beta_1 = 1$ (for Stress), and $\beta_2 = 0.1$ (for Time).
 
 ```{python}
 #| label: bivariate-stresssurvey-regression
-#| echo: true
 #| fig-cap: "Bivariate regression of Anxiety on StressSurvey"
 
 import pandas as pd
@@ -225,7 +224,6 @@ The regression is trying to fit a linear relationship between StressSurvey and A
 ```{python}
 #| label: fig-stresssurvey-scatter
 #| fig-cap: "Scatter plot of Anxiety vs StressSurvey with regression line"
-#| echo: true
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -312,7 +310,6 @@ The scatter plot reveals several important characteristics of the bivariate rela
 
 ```{python}
 #| label: bivariate-time-regression
-#| echo: true
 #| fig-cap: "Bivariate regression of Anxiety on Time"
 
 import pandas as pd
@@ -350,8 +347,7 @@ print("=" * 60)
 print(model_sm.summary())
 ```
 
-**Comparison to True Relationship:**
-This will have same issues as the bivariate regression of Anxiety on StressSurvey, but with Time instead of StressSurvey.
+**Analysis** This will have same issues as the bivariate regression of Anxiety on StressSurvey, but with Time instead of StressSurvey.
 
 The true relationship is $Anxiety = Stress + 0.1 \times Time$, where:
 - The coefficient on Stress ($\beta_1$) = 1.0
@@ -376,7 +372,6 @@ The bivariate regression will produce statistically significant results, but the
 ```{python}
 #| label: fig-time-scatter
 #| fig-cap: "Scatter plot of Anxiety vs Time with regression line"
-#| echo: true
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -467,7 +462,6 @@ The visualization demonstrates why graphical analysis alone is insufficient—we
 ## 📝 Answer:
 ```{python}
 #| label: multiple-regression-stresssurvey-time
-#| echo: true
 #| fig-cap: "Multiple regression of Anxiety on StressSurvey and Time"
 
 import pandas as pd
@@ -507,7 +501,7 @@ print("=" * 60)
 print(model_sm.summary())
 ```
 
-**Comparison to True Relationship:**
+**Analysis:**
 
 The true relationship is $Anxiety = Stress + 0.1 \times Time$, where:
 - Intercept ($\beta_0$) = 0
@@ -529,15 +523,8 @@ However, in this multiple regression, we're using StressSurvey instead of the tr
 
 4. **Intercept:** The true intercept is 0, but the estimated intercept may be non-zero as the model tries to adjust for the non-linear relationship between StressSurvey and Stress.
 
-5. **Statistical Significance vs. Correctness:** Even if all coefficients are statistically significant and the R-squared is high, the coefficients are still wrong because they're based on a non-linear proxy variable. This demonstrates a critical lesson: **statistical significance does not guarantee that your coefficients are correct or interpretable.**
+5. **Statistical Significance vs. Correctness:** Even if all coefficients are statistically significant and the R-squared is high, the coefficients are still wrong because they're based on a non-linear proxy variable. This demonstrates a critical lesson: **Important Learning: Statistical significance does not guarantee that your coefficients are correct or interpretable.**
 
-6. **The Fundamental Problem:** This regression illustrates why using proxy variables in regression can be dangerous. Even when:
-   - The proxy is "good" (monotonic relationship with the true variable)
-   - The model includes all relevant variables (Time is included)
-   - The R-squared is high
-   - All coefficients are statistically significant
-
-The coefficients can still be fundamentally wrong because linear regression assumes linear relationships, and proxy variables often have non-linear relationships with the true variables they're meant to measure.
 :::
 
 
@@ -563,17 +550,12 @@ When analyzing your multiple regression results, compare them to the **true rela
 
 6. **Multiple Regression Analysis:** Run a multiple regression of Anxiety on both **Stress** and Time. What are the estimated coefficients? How do they compare to the true relationship?
 
-**Answer:**
+::: {.callout-note}
+## 📝 Answer:
 
-To answer this question, I'll run a multiple regression of Anxiety on both Stress (the true variable) and Time. The true relationship we know is:
-
-$$Anxiety = Stress + 0.1 \times Time$$
-
-where $\beta_0 = 0$, $\beta_1 = 1$ (for Stress), and $\beta_2 = 0.1$ (for Time). This regression uses the actual Stress variable, not a proxy.
 
 ```{python}
 #| label: multiple-regression-stress-time
-#| echo: true
 #| fig-cap: "Multiple regression of Anxiety on Stress and Time"
 
 import pandas as pd
@@ -640,23 +622,16 @@ The true relationship is $Anxiety = Stress + 0.1 \times Time$, where:
 
 4. **Statistical Significance:** All coefficients should be statistically significant, but more importantly, they should be **correct**—meaning they accurately reflect the true causal relationships.
 
-5. **The Critical Lesson:** This comparison between the two multiple regression models (one with StressSurvey, one with Stress) demonstrates a fundamental problem in real-world research:
-   - Both models will show statistical significance
-   - Both models may have high R-squared values
-   - But only one model (using the true Stress variable) gives correct coefficients
-   - The StressSurvey model gives wrong coefficients even though it appears to be a "good" model statistically
-
-This is the core problem: **statistical significance and model fit do not guarantee that your coefficients are correct or interpretable.** The choice of which variables to include (and how to measure them) fundamentally determines whether your regression results are meaningful or misleading.
+**Key Learning:** This is the core problem: **statistical significance and model fit do not guarantee that your coefficients are correct or interpretable.** The choice of which variables to include (and how to measure them) fundamentally determines whether your regression results are meaningful or misleading.
+:::
 
 7. **Model Comparison:** Compare the R-squared values and coefficient interpretations between the two multiple regression models. Do both models show statistical significance in all of their coefficient estimates? What does this tell you about the real-world implications of multiple regression results?
 
-**Answer:**
-
-To answer this question, I'll compare the two multiple regression models side by side: one using StressSurvey and Time, and the other using Stress and Time.
+::: {.callout-note}
+## 📝 Answer:
 
 ```{python}
 #| label: model-comparison
-#| echo: true
 #| fig-cap: "Comparison of two multiple regression models"
 
 import pandas as pd
@@ -745,91 +720,22 @@ print("=" * 80)
 print(model2_sm.summary())
 ```
 
-**Comparison Analysis:**
-
-1. **R-squared Values:**
-   - Both models will likely show very high R-squared values (potentially 1.0 or very close to it)
-   - This suggests both models "fit" the data well
-   - However, high R-squared does not indicate which model has correct coefficients
-
-2. **Coefficient Values:**
-   - **Model 1 (StressSurvey + Time):** The coefficients will be distorted because StressSurvey is a non-linear proxy for Stress
-     - The StressSurvey coefficient will not equal 1.0 (the true Stress coefficient)
-     - The Time coefficient may also be biased
-   - **Model 2 (Stress + Time):** The coefficients should be very close to the true values
-     - Stress coefficient ≈ 1.0
-     - Time coefficient ≈ 0.1
-     - Intercept ≈ 0
-
-3. **Statistical Significance:**
-   - Both models will likely show that all coefficients are statistically significant (p < 0.05, often p < 0.001)
-   - This is the critical problem: **both models appear to be "good" models based on statistical criteria, but only one has correct coefficients**
-
-4. **Coefficient Interpretations:**
-
-   **Model 1 (StressSurvey + Time):**
-   - The StressSurvey coefficient is **wrong**—it doesn't represent the true effect of Stress on Anxiety
-   - The Time coefficient may be **biased**—it's trying to compensate for the non-linear relationship between StressSurvey and Stress
-   - These coefficients cannot be interpreted as causal effects
-
-   **Model 2 (Stress + Time):**
-   - The Stress coefficient is **correct**—it accurately represents the true effect (1.0)
-   - The Time coefficient is **correct**—it accurately represents the true effect (0.1)
-   - These coefficients can be interpreted as causal effects (in this controlled simulation)
-
-5. **Real-World Implications:**
-
-   This comparison reveals several critical lessons for real-world regression analysis:
-
-   a. **Statistical Significance is Not Enough:**
-      - Both models show statistical significance
-      - Both models have high R-squared
-      - But only one model has correct coefficients
-      - **You cannot rely on p-values and R² alone to validate your model**
-
-   b. **Measurement Matters:**
-      - The choice between StressSurvey (proxy) and Stress (true variable) fundamentally changes the results
-      - In real research, we often don't have the "true" variable—we only have proxies
-      - This creates a fundamental uncertainty: are our coefficients correct, or are they distorted by measurement error?
-
-   c. **The Illusion of Good Models:**
-      - Model 1 looks like a "good" model by all standard statistical criteria
-      - It has high R², significant coefficients, and appears well-specified
-      - But it's fundamentally wrong because it uses a non-linear proxy
-      - **This is why "garbage can" regressions are so dangerous—they look good statistically but give wrong answers**
-
-   d. **The Replication Crisis Connection:**
-      - This demonstrates why many published regression results cannot be replicated
-      - Researchers often use proxy variables without understanding the non-linear relationships
-      - They report statistically significant results that are fundamentally wrong
-      - The problem isn't always fraud or p-hacking—sometimes it's just using the wrong variables
-
-   e. **Policy and Decision-Making:**
-      - If policymakers rely on Model 1, they'll make decisions based on wrong coefficients
-      - The estimated effects will be incorrect, leading to ineffective or harmful policies
-      - This is why understanding measurement and model specification is crucial for applied research
-
-   f. **The Fundamental Challenge:**
-      - In real research, we rarely know the "true" relationship
-      - We can't always tell which model is correct just by looking at statistical output
-      - This is why theory, domain knowledge, and careful measurement are essential
-      - **Statistical tools are necessary but not sufficient for good research**
-
 **Conclusion:**
 
 Both models demonstrate statistical significance and high model fit, but only Model 2 (using the true Stress variable) produces correct coefficients. This comparison illustrates a fundamental problem in regression analysis: **statistical significance and high R-squared do not guarantee that your model is correct or that your coefficients are interpretable.** The choice of variables and how they're measured fundamentally determines whether regression results are meaningful or misleading. This is why careful model specification, understanding of measurement issues, and theoretical grounding are essential for valid regression analysis.
+:::
 
 ### Questions to Answer for 95% Grade on Challenge
 
 8. **Reflect on Real-World Implications:** For each of the two multiple regression models, assume their respective outputs/conclusions were published in academic journals and then subsequently picked up by the popular press.  What headline about time spent on social media and its effect on anxiety would you expect to see from a popular press outlet covering the first model? And what headline would you expect to see from a popular press outlet covering the second model?  Assuming confirmation bias is real, which model is a typical parent going to believe?  Which model will Facebook, Instagram, and TikTok executives prefer?
 
-**Answer:**
+::: {.callout-note}
+## 📝 Answer:
 
 To answer this question, I'll first extract the Time coefficients from both models to understand what each model suggests about the relationship between social media use (Time) and anxiety.
 
 ```{python}
 #| label: real-world-implications
-#| echo: true
 #| fig-cap: "Real-world implications of model differences"
 
 import pandas as pd
@@ -909,86 +815,22 @@ or
 - This is a more nuanced finding that doesn't make for as dramatic a headline
 - The story would emphasize that stress is the primary driver, with social media having a modest additional effect
 
-**Confirmation Bias and Parental Beliefs:**
-
 **Which model would a typical parent believe?**
 
-Most parents would likely **believe Model 1** (the one with the larger, distorted coefficient) because:
-
-1. **Confirmation Bias:** Parents are already worried about social media's impact on their children. A study showing a large negative effect confirms their existing fears and beliefs.
-
-2. **Availability Heuristic:** Parents see their children on phones constantly and notice mood changes. A study showing a strong link between social media and anxiety fits their observations, even if the relationship is more complex.
-
-3. **Emotional Resonance:** Headlines about "social media destroying kids' mental health" are more emotionally compelling than nuanced findings about "small but significant effects."
-
-4. **Media Amplification:** The popular press would amplify Model 1's findings because:
-   - Larger effects make better headlines
-   - Fear-based stories get more clicks and engagement
-   - The narrative is simpler: "social media = bad" is easier to communicate than "social media has a small effect, but stress is the main problem"
-
-5. **Lack of Statistical Literacy:** Most parents (and journalists) don't understand the difference between:
-   - A statistically significant result
-   - A correctly specified model
-   - The importance of proper variable measurement
+Most parents would likely **believe Model 1** (the one with the larger, distorted coefficient) because of confirmation bias as parents are already worried about social media's impact on their children.
 
 **Which model would Facebook, Instagram, and TikTok executives prefer?**
 
-Social media executives would **strongly prefer Model 2** (the one with the correct, smaller coefficient) because:
+Social media executives would **strongly prefer Model 2** (the one with the correct, smaller coefficient) because it allows them to argue that social media is not the primary cause of anxiety.
 
-1. **Smaller Effect Size:** Model 2 shows that social media has only a modest effect (coefficient ≈ 0.1) compared to stress (coefficient = 1.0). This allows them to argue that:
-   - Social media is not the primary cause of anxiety
-   - Stress (from school, family, peers) is the real problem
-   - Their platforms are being unfairly blamed
-
-2. **Plausible Deniability:** Model 2's findings allow executives to say:
-   - "The research shows our platforms have a small effect, not a large one"
-   - "We're committed to user well-being, but the data shows stress is the main issue"
-   - "We support further research, but current findings suggest our impact is limited"
-
-3. **Regulatory Protection:** Smaller effect sizes mean:
-   - Less pressure for government regulation
-   - More room to argue that self-regulation is sufficient
-   - Ability to point to other factors (stress, genetics, family environment) as primary causes
-
-4. **Public Relations Strategy:** Executives can use Model 2 to:
-   - Acknowledge there's an effect (showing they're not in denial)
-   - Minimize the magnitude (arguing it's small)
-   - Shift blame to other factors (stress, mental health infrastructure)
-
-5. **Legal Defense:** In lawsuits or regulatory hearings, Model 2 provides:
-   - Evidence that the effect is small
-   - Support for arguments that other factors are more important
-   - Basis for claiming they're not primarily responsible for mental health issues
-
-**The Critical Problem:**
-
-This scenario illustrates a fundamental issue in how research is communicated and used:
-
-1. **The Wrong Model Gets More Attention:** Model 1 (with wrong coefficients) would likely get more media coverage because it produces more dramatic findings.
-
-2. **Confirmation Bias Amplifies the Problem:** People believe what confirms their existing views, regardless of which model is actually correct.
-
-3. **Stakeholders Pick the Model That Suits Them:** 
-   - Parents and advocacy groups would emphasize Model 1
-   - Tech companies would emphasize Model 2
-   - Neither group would necessarily care which model is actually correct
-
-4. **The Truth Gets Lost:** The nuanced truth—that Model 2 is correct, social media has a small but real effect, and stress is the primary driver—gets lost in the noise of competing narratives.
-
-5. **Policy Implications:** If policymakers rely on Model 1:
-   - They might over-regulate social media
-   - They might under-invest in stress reduction programs
-   - They might miss the real drivers of anxiety
-
-**Conclusion:**
-
-This comparison reveals how regression model specification doesn't just affect statistical results—it shapes public discourse, influences policy, and determines which narratives gain traction. The model with **wrong but dramatic** results (Model 1) would likely dominate public conversation, while the model with **correct but nuanced** results (Model 2) would be preferred by those with financial interests in minimizing the effect. This is why understanding regression methodology, measurement issues, and model specification is not just an academic exercise—it's essential for informed public debate and sound policy decisions.
+:::
 
 ### Questions to Answer for 100% Grade on Challenge
 
 9. **Avoiding Misleading Statistical Significance:** Reflect on this tip to avoid being misled by statistically significant results: splitting the sample into meaningful subsets ("statistical regimes"), and using graphical diagnostics for linearity rather than blind reliance on "canned" regressions. Apply this approach to multiple regression of Anxiety on both StressSurvey and Time by analyzing a smartly chosen subset of the data. What specific subset did you choose and why?  Did you get results that are both statistically significant and close to the true relationship?
 
-**Answer:**
+::: {.callout-note}
+## 📝 Answer:
 
 To answer this question, I'll use graphical diagnostics to identify where the relationship between StressSurvey and Stress is more linear, then run the regression on that subset to see if we can recover coefficients closer to the true values.
 
@@ -997,7 +839,6 @@ To answer this question, I'll use graphical diagnostics to identify where the re
 ```{python}
 #| label: fig-linearity-diagnostics
 #| fig-cap: "Graphical diagnostics to identify linear vs non-linear regimes"
-#| echo: true
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -1094,7 +935,6 @@ Based on the graphical diagnostics, I'll analyze the **low-stress regime (Stress
 
 ```{python}
 #| label: subset-regression-analysis
-#| echo: true
 #| fig-cap: "Multiple regression on low-stress subset"
 
 import pandas as pd
@@ -1242,49 +1082,6 @@ print(f"   Full model: All coefficients significant = {all(p < 0.05 for p in mod
 print(f"   Subset model: All coefficients significant = {all(p < 0.05 for p in model_subset_sm.pvalues)}")
 ```
 
-**Analysis and Interpretation:**
-
-**1. Subset Choice: Low-Stress Regime (Stress ≤ 2)**
-
-I chose this subset because:
-
-- **Graphical diagnostics revealed non-linearity:** The plot of Stress vs StressSurvey shows that the relationship is approximately linear in the low-stress range (Stress ≤ 2, where StressSurvey ≈ 3 × Stress) but becomes non-linear at higher stress levels (Stress ≥ 8, where the ratio changes from 1.125 to 1.0).
-
-- **Residual analysis confirms the pattern:** The residual plot shows smaller, more consistent residuals in the low-stress regime, indicating better linearity.
-
-- **Meaningful statistical regime:** This represents a distinct subset of the data where the proxy variable (StressSurvey) has a consistent, approximately linear relationship with the true variable (Stress).
-
-**2. Results: Statistical Significance and Accuracy**
-
-The subset analysis should show:
-
-- **Statistical Significance:** All coefficients should be statistically significant (p < 0.05), demonstrating that the results are not due to chance.
-
-- **Closer to True Values:** 
-  - The Time coefficient should be closer to 0.1 (the true value) compared to the full model
-  - The StressSurvey coefficient should be approximately 0.333 (since in this regime, StressSurvey = 3 × Stress, and the true Stress coefficient is 1.0, so StressSurvey coefficient ≈ 1.0/3 ≈ 0.333)
-  - The intercept should be closer to 0
-
-**3. Key Insights:**
-
-- **Graphical diagnostics work:** By visualizing the relationship and identifying where linearity breaks down, we can select a subset that gives more accurate results.
-
-- **Statistical regimes matter:** Different parts of the data may have different relationships. Analyzing them separately can reveal insights that are hidden in the full model.
-
-- **Trade-offs:** While the subset gives more accurate coefficients, it uses fewer observations, which may reduce statistical power. However, in this case, we still achieve statistical significance.
-
-- **The fundamental lesson:** This demonstrates why "canned" regressions (running regression on the full dataset without checking assumptions) can be misleading. Graphical diagnostics and thoughtful subset analysis can help identify when and where linear regression is appropriate.
-
-**4. Real-World Application:**
-
-This approach has practical value:
-
-- **Identify problematic ranges:** When using proxy variables, graphical diagnostics can help identify where the proxy is most reliable.
-
-- **Improve coefficient estimates:** By focusing on ranges where assumptions are better met, we can get more accurate estimates.
-
-- **Validate model assumptions:** Graphical diagnostics provide a way to check whether linear regression is appropriate, rather than blindly assuming it is.
-
 **Conclusion:**
 
 By using graphical diagnostics to identify a subset where the relationship is more linear (low-stress regime), we can run a regression that produces:
@@ -1292,5 +1089,6 @@ By using graphical diagnostics to identify a subset where the relationship is mo
 - **Coefficients closer to the true relationship** (especially for Time, which should be close to 0.1)
 
 This demonstrates that splitting the sample into meaningful subsets ("statistical regimes") and using graphical diagnostics for linearity, rather than blind reliance on "canned" regressions, can help avoid misleading statistical significance and produce more accurate results. The key is to understand your data, visualize relationships, and think critically about where your model assumptions are most likely to hold.
+:::
 
 Remember: **Correlation is not causation, and regression coefficients can lie!** 📊
