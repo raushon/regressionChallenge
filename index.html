@@ -137,20 +137,6 @@ window.Quarto = {
 <section id="challenge-overview" class="level2">
 <h2 class="anchored" data-anchor-id="challenge-overview">Challenge Overview</h2>
 <p><strong>Your Mission:</strong> Create a comprehensive Quarto document that demonstrates the dangers of trusting linear models when relationships are non-linear, analyzes the interpretability issues that arise, and presents compelling visual evidence of why we need to be skeptical of regression results. Then render the document to HTML and deploy it via GitHub Pages using the starter repository workflow.</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>⚠️ AI Partnership Required
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This challenge pushes boundaries intentionally. You’ll tackle problems that normally require weeks of study, but with Cursor AI as your partner (and your brain keeping it honest), you can accomplish more than you thought possible.</p>
-<p><strong>The new reality:</strong> The four stages of competence are Ignorance → Awareness → Learning → Mastery. AI lets us produce Mastery-level work while operating primarily in the Awareness stage. I focus on awareness training, you leverage AI for execution, and together we create outputs that used to require years of dedicated study.</p>
-</div>
-</div>
 </section>
 <section id="problem-violating-the-assumption-of-linearity" class="level2">
 <h2 class="anchored" data-anchor-id="problem-violating-the-assumption-of-linearity">Problem Violating the Assumption of Linearity🎯</h2>
@@ -232,7 +218,7 @@ Anxiety = \beta_0 + \beta_1 \times Stress + \beta_2 \times Time + \epsilon
 Table&nbsp;1: Observed data with known true relationships
 </figcaption>
 <div aria-describedby="tbl-observations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="44">
+<div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 
 
@@ -454,8 +440,8 @@ DETAILED STATISTICAL OUTPUT:
 Dep. Variable:                      y   R-squared:                       0.901
 Model:                            OLS   Adj. R-squared:                  0.893
 Method:                 Least Squares   F-statistic:                     118.4
-Date:                Tue, 09 Dec 2025   Prob (F-statistic):           6.68e-08
-Time:                        17:10:04   Log-Likelihood:                -27.079
+Date:                Wed, 10 Dec 2025   Prob (F-statistic):           6.68e-08
+Time:                        00:37:23   Log-Likelihood:                -27.079
 No. Observations:                  15   AIC:                             58.16
 Df Residuals:                      13   BIC:                             59.57
 Df Model:                           1                                         
@@ -570,8 +556,8 @@ DETAILED STATISTICAL OUTPUT:
 Dep. Variable:                      y   R-squared:                       0.563
 Model:                            OLS   Adj. R-squared:                  0.529
 Method:                 Least Squares   F-statistic:                     16.75
-Date:                Tue, 09 Dec 2025   Prob (F-statistic):            0.00127
-Time:                        17:10:05   Log-Likelihood:                -38.223
+Date:                Wed, 10 Dec 2025   Prob (F-statistic):            0.00127
+Time:                        00:37:24   Log-Likelihood:                -38.223
 No. Observations:                  15   AIC:                             80.45
 Df Residuals:                      13   BIC:                             81.86
 Df Model:                           1                                         
@@ -694,8 +680,8 @@ DETAILED STATISTICAL OUTPUT:
 Dep. Variable:                      y   R-squared:                       0.935
 Model:                            OLS   Adj. R-squared:                  0.924
 Method:                 Least Squares   F-statistic:                     86.32
-Date:                Tue, 09 Dec 2025   Prob (F-statistic):           7.54e-08
-Time:                        17:10:05   Log-Likelihood:                -23.931
+Date:                Wed, 10 Dec 2025   Prob (F-statistic):           7.54e-08
+Time:                        00:37:24   Log-Likelihood:                -23.931
 No. Observations:                  15   AIC:                             53.86
 Df Residuals:                      12   BIC:                             55.99
 Df Model:                           2                                         
@@ -802,8 +788,8 @@ DETAILED STATISTICAL OUTPUT:
 Dep. Variable:                      y   R-squared:                       1.000
 Model:                            OLS   Adj. R-squared:                  1.000
 Method:                 Least Squares   F-statistic:                 5.369e+30
-Date:                Tue, 09 Dec 2025   Prob (F-statistic):          1.95e-180
-Time:                        17:10:05   Log-Likelihood:                 472.82
+Date:                Wed, 10 Dec 2025   Prob (F-statistic):          1.95e-180
+Time:                        00:37:24   Log-Likelihood:                 472.82
 No. Observations:                  15   AIC:                            -939.6
 Df Residuals:                      12   BIC:                            -937.5
 Df Model:                           2                                         
@@ -906,8 +892,8 @@ DETAILED OUTPUT: Model 1 (StressSurvey + Time)
 Dep. Variable:                      y   R-squared:                       0.935
 Model:                            OLS   Adj. R-squared:                  0.924
 Method:                 Least Squares   F-statistic:                     86.32
-Date:                Tue, 09 Dec 2025   Prob (F-statistic):           7.54e-08
-Time:                        17:10:05   Log-Likelihood:                -23.931
+Date:                Wed, 10 Dec 2025   Prob (F-statistic):           7.54e-08
+Time:                        00:37:25   Log-Likelihood:                -23.931
 No. Observations:                  15   AIC:                             53.86
 Df Residuals:                      12   BIC:                             55.99
 Df Model:                           2                                         
@@ -936,8 +922,8 @@ DETAILED OUTPUT: Model 2 (Stress + Time)
 Dep. Variable:                      y   R-squared:                       1.000
 Model:                            OLS   Adj. R-squared:                  1.000
 Method:                 Least Squares   F-statistic:                 5.369e+30
-Date:                Tue, 09 Dec 2025   Prob (F-statistic):          1.95e-180
-Time:                        17:10:05   Log-Likelihood:                 472.82
+Date:                Wed, 10 Dec 2025   Prob (F-statistic):          1.95e-180
+Time:                        00:37:25   Log-Likelihood:                 472.82
 No. Observations:                  15   AIC:                            -939.6
 Df Residuals:                      12   BIC:                            -937.5
 Df Model:                           2                                         
@@ -1163,8 +1149,8 @@ DETAILED STATISTICAL OUTPUT
 Dep. Variable:                      y   R-squared:                       1.000
 Model:                            OLS   Adj. R-squared:                  1.000
 Method:                 Least Squares   F-statistic:                 2.275e+31
-Date:                Tue, 09 Dec 2025   Prob (F-statistic):           2.29e-93
-Time:                        17:10:06   Log-Likelihood:                 308.43
+Date:                Wed, 10 Dec 2025   Prob (F-statistic):           2.29e-93
+Time:                        00:37:26   Log-Likelihood:                 308.43
 No. Observations:                   9   AIC:                            -610.9
 Df Residuals:                       6   BIC:                            -610.3
 Df Model:                           2                                         
